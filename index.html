@@ -4,13 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#2f5d43">
-<title>Planejamento Mensal Financeiro</title>
+<title>Mês a Mês</title>
 <style>
 :root{--bg:#f7f7f2;--card:#fff;--tx:#202720;--tx2:#737a73;--bd:#e6e9e2;--p:#2f5d43;--pl:#e6efe5;--red:#c75b52;--redl:#fbeae7;--yel:#f3dfa8}
-@media(prefers-color-scheme:dark){:root{--bg:#121614;--card:#1b211e;--tx:#e8ede9;--tx2:#9aa59e;--bd:#2a332e;--p:#6faf8a;--pl:#22302a;--redl:#3a2320;--yel:#5a4a1c}.st-previsto{background:#233546;color:#a9c8e8}}
+:root[data-theme=escuro]{--bg:#121614;--card:#1b211e;--tx:#e8ede9;--tx2:#9aa59e;--bd:#2a332e;--p:#6faf8a;--pl:#22302a;--redl:#3a2320;--yel:#5a4a1c}:root[data-theme=escuro] .st-previsto{background:#233546;color:#a9c8e8}
+@media(prefers-color-scheme:dark){:root[data-theme=sistema]{--bg:#121614;--card:#1b211e;--tx:#e8ede9;--tx2:#9aa59e;--bd:#2a332e;--p:#6faf8a;--pl:#22302a;--redl:#3a2320;--yel:#5a4a1c}:root[data-theme=sistema] .st-previsto{background:#233546;color:#a9c8e8}}
+:root[data-theme=azul]{--bg:#f4f7fb;--bd:#dfe7f1;--p:#2f5f9e;--pl:#e4ecf7}
+:root[data-theme=roxo]{--bg:#f8f6fb;--bd:#e6e0ef;--p:#6b4fa0;--pl:#ece6f6}
+:root[data-theme=rosa]{--bg:#fbf5f7;--bd:#efdfe5;--p:#b5446e;--pl:#f8e4ec}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 Inter,system-ui,sans-serif}
-.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.wrap{max-width:1560px;margin:0 auto;padding:16px}
 header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
 h1{margin:0;font-size:1.3rem;color:var(--p)}h2{margin:0;font-size:1rem}
 .nav{display:flex;align-items:center;gap:6px}
@@ -28,7 +32,7 @@ th{text-align:left;color:var(--tx2);font-weight:500;font-size:.8rem;padding:4px 
 td{padding:3px 2px;border-top:1px solid var(--bd)}
 td input,td select{width:100%;min-width:70px;border:1px solid transparent;background:transparent;padding:7px 6px;border-radius:8px;font:inherit;color:inherit}
 td input:hover,td select:not(.st):hover,td input:focus,td select:not(.st):focus{border-color:var(--bd);background:var(--bg)}
-td .pn{width:3.4rem;min-width:0;display:inline-block}.pr{display:flex;align-items:center;gap:2px}
+td .pn{width:3.3rem;min-width:0;display:inline-block;text-align:center;padding:7px 2px;-moz-appearance:textfield}td .pn::-webkit-inner-spin-button,td .pn::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.pr select{min-width:112px}.pr{display:flex;align-items:center;gap:2px}
 td select.st{border:0;border-radius:99px;padding:5px 8px;font-size:.85rem;font-weight:500;cursor:pointer;min-width:100px}
 .st-previsto{background:#dbe8f5;color:#24466b}.st-pendente{background:var(--yel);color:var(--tx)}.st-pago{background:var(--pl);color:var(--p)}
 dialog{border:0;border-radius:14px;padding:20px;width:min(420px,94vw);background:var(--card);color:var(--tx)}dialog::backdrop{background:#0006}
@@ -48,8 +52,14 @@ body[data-view=goals] #mnav{display:none}
 .gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px;margin-top:14px}
 .gn{font:inherit;font-weight:600;border:1px solid transparent;background:transparent;color:inherit;padding:6px;border-radius:8px;flex:1;min-width:0}.gn:hover,.gn:focus{border-color:var(--bd)}
 .alert{background:var(--redl);color:var(--red);border-radius:12px;padding:8px 12px;margin:0 0 14px}
+.sub{color:var(--tx2);font-size:.75rem;white-space:nowrap}
+table.wide{min-width:1060px}table.mid{min-width:720px}
+td select.pk{min-width:150px}td select.pc{border:1px solid;border-radius:99px;padding-left:10px}td input[data-f=desc]{min-width:160px}td input[type=date]{min-width:132px}
+.lbl{font-size:.78rem;padding:6px 8px;border:1px solid var(--bd);white-space:nowrap}
+h1 small{font-weight:400;color:var(--tx2);font-size:.9rem;margin-left:8px}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--p);color:var(--card);padding:10px 16px;border-radius:12px;opacity:0;transition:.2s;pointer-events:none;z-index:50;max-width:92vw}#toast.show{opacity:1}
 @media(max-width:800px){
- .row2{grid-template-columns:1fr}
+ .row2{grid-template-columns:1fr}table.wide,table.mid{min-width:0}
  table,tbody,tr,td{display:block}thead{display:none}
  tr{border:1px solid var(--bd);border-radius:12px;margin-bottom:10px;padding:6px}
  td{display:flex;align-items:center;gap:8px;border:0}td::before{content:attr(data-l);width:78px;color:var(--tx2);font-size:.8rem;flex-shrink:0}
@@ -60,7 +70,7 @@ body[data-view=goals] #mnav{display:none}
 <body>
 <div class="wrap">
 <header>
-  <h1>Planejamento Mensal</h1>
+  <h1>Planejamento Mensal<small id="hello"></small></h1>
   <div class="nav" id="mnav">
     <button class="g" id="prev" aria-label="Mês anterior">‹</button>
     <span id="mlabel" aria-live="polite"></span>
@@ -68,6 +78,7 @@ body[data-view=goals] #mnav{display:none}
     <button class="g" id="today">Hoje</button>
   </div>
   <div class="nav">
+    <button class="g" id="cfg">⚙ Ajustes</button>
     <button class="g" id="exp">Exportar backup</button>
     <label class="btn g" tabindex="0">Importar<input type="file" id="imp" accept=".json" hidden></label>
   </div>
@@ -88,14 +99,14 @@ body[data-view=goals] #mnav{display:none}
 
 <section class="card">
   <div class="hd"><h2>Saídas</h2><span><button class="g" id="lst-out">Listas</button> <button id="add-out">+ Saída</button></span></div>
-  <div class="tw"><table><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Conta</th><th>Tipo</th><th>Valor</th><th>Repete</th><th>Status</th><th></th></tr></thead><tbody id="t-out"></tbody></table></div>
+  <div class="tw"><table class="wide"><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Conta</th><th>Tipo</th><th>Valor</th><th>Repete</th><th>Status</th><th></th></tr></thead><tbody id="t-out"></tbody></table></div>
   <p class="empty" id="e-out">Nenhuma saída neste mês. Clique em “+ Saída” para começar.</p>
 </section>
 
 <div class="row2">
   <section class="card">
     <div class="hd"><h2>Entradas</h2><span><button class="g" id="lst-in">Listas</button> <button id="add-in">+ Entrada</button></span></div>
-    <div class="tw"><table><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Conta</th><th>Valor</th><th>Repete</th><th>Status</th><th></th></tr></thead><tbody id="t-in"></tbody></table></div>
+    <div class="tw"><table class="mid"><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Conta</th><th>Valor</th><th>Repete</th><th>Status</th><th></th></tr></thead><tbody id="t-in"></tbody></table></div>
     <p class="empty" id="e-in">Nenhuma entrada neste mês. Clique em “+ Entrada”.</p>
   </section>
   <section class="card">
@@ -104,6 +115,8 @@ body[data-view=goals] #mnav{display:none}
     <div id="legend"></div>
   </section>
 </div>
+<section class="card" style="margin-top:14px"><div class="hd"><h2>Assinaturas</h2><b id="subs-total"></b></div><div id="subs"></div>
+  <p class="empty" id="e-subs">Nenhuma assinatura neste mês. Em uma saída, escolha “Assinatura” em “Repete”.</p></section>
 </div>
 <div id="tab-bud" hidden><section class="card"><div class="hd"><h2>Orçamento do mês</h2></div><div id="bud"></div></section>
   <p class="empty">O gasto de cada categoria vem das saídas lançadas na planilha do mês (todos os status).</p></div>
@@ -115,6 +128,7 @@ body[data-view=goals] #mnav{display:none}
 <footer>Os dados ficam só neste navegador. Exporte um backup de vez em quando.</footer>
 </div>
 <dialog id="dlg"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
 
 <script>
 const KEY = 'mesames:v1', $ = s => document.querySelector(s);
@@ -127,20 +141,25 @@ const dim = k => { const [y, m] = k.split('-').map(Number); return new Date(y, m
 /* Valores em centavos (inteiros). Aceita "1.527,00" ou "1527.5". */
 const cents = v => { const n = parseFloat(String(v).replace(/[^\d,.-]/g, '').replace(/\.(?=\d{3}(\D|$))/g, '').replace(',', '.')); return isNaN(n) ? 0 : Math.round(n * 100); };
 const fld = c => (c / 100).toFixed(2).replace('.', ',');
-const PAL = ['#2f5d43', '#e5b85c', '#c75b52', '#5b8db8', '#9a7bb5', '#d98e5f', '#4f9d9d', '#8faf91', '#b5b5a0', '#d46a9a'];
-const color = n => PAL[[...n].reduce((a, c) => a + c.charCodeAt(0), 0) % PAL.length];
+const PAL = ['#2f5d43', '#e5b85c', '#c75b52', '#5b8db8', '#9a7bb5', '#d98e5f', '#4f9d9d', '#8faf91', '#b5b5a0', '#d46a9a', '#6c7a2f', '#3f5f9a', '#a8553a', '#7a6f9b'];
+/* Cada categoria recebe uma cor própria (a primeira livre) e a mantém: a mesma cor vale na tabela, na pizza e nas assinaturas. */
+const color = n => { const m = D.colors; if (!(n in m)) { const used = new Set(Object.values(m)); let i = PAL.findIndex((_, k) => !used.has(k)); if (i < 0) i = Object.keys(m).length % PAL.length; m[n] = i; save(); } return PAL[m[n]]; };
+const THEMES = [['sistema', 'Automático (segue o aparelho)'], ['verde', 'Claro — verde'], ['escuro', 'Escuro'], ['azul', 'Azul'], ['roxo', 'Roxo'], ['rosa', 'Rosa']];
+const monthName = k => new Date(+k.slice(0, 4), +k.slice(5) - 1, 1).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+let tt; function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 3000); }
 const el = (t, a = {}, ...kids) => { const e = document.createElement(t); let val;
   for (const [k, v] of Object.entries(a)) { if (k === 'value') val = v; else if (k.startsWith('on')) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v); }
   e.append(...kids); if (val !== undefined) e.value = val; return e; };
 
-const valid = o => o && Array.isArray(o.items) && o.items.every(i => i.id && ['in', 'out'].includes(i.kind) && Number.isInteger(i.amount) && /^\d{4}-\d{2}-\d{2}$/.test(i.date) && ['unico', 'mensal', 'parcelado'].includes(i.rec));
+const valid = o => o && Array.isArray(o.items) && o.items.every(i => i.id && ['in', 'out'].includes(i.kind) && Number.isInteger(i.amount) && /^\d{4}-\d{2}-\d{2}$/.test(i.date) && ['unico', 'mensal', 'parcelado', 'assinatura'].includes(i.rec));
 /* Listas de categorias e contas são separadas para saídas e entradas. Status por mês: previsto | pendente | pago (recebido). */
 const DEF = { out: ['Casa', 'Carro', 'Saúde', 'Assinaturas', 'Mercado', 'Lazer', 'Transporte', 'Outros'], in: ['Salário', 'Renda extra', 'Outros'] };
 function norm(o) {
   o.items.forEach(i => { i.st = i.st || Object.fromEntries(Object.entries(i.paid || {}).filter(([, v]) => v).map(([k]) => [k, 'pago'])); delete i.paid; });
   if (!o.lists) { o.lists = {}; for (const k of ['out', 'in']) { const mine = f => o.items.filter(i => i.kind === k && i[f]).map(i => i[f]);
     o.lists[k] = { cats: [...new Set([...DEF[k], ...mine('cat')])], accs: [...new Set(mine('account'))] }; } }
-  o.budgets = o.budgets || {}; o.goals = o.goals || [];
+  o.items.forEach(i => { i.p0 = i.p0 || 1; });
+  o.budgets = o.budgets || {}; o.goals = o.goals || []; o.colors = o.colors || {}; o.theme = o.theme || 'sistema'; if (o.name === undefined) o.name = 'Daniele';
   return o;
 }
 function load() { try { const o = JSON.parse(localStorage.getItem(KEY)); if (valid(o)) return norm(o); } catch (e) {} return norm({ items: [] }); }
@@ -151,15 +170,15 @@ let D = load(), ym = todayISO().slice(0, 7);
 function occ(it, k) {
   const d = diff(it.date.slice(0, 7), k);
   if (it.rec === 'unico') return d === 0 ? {} : null;
-  if (it.rec === 'mensal') return d >= 0 && (!it.end || k <= it.end) ? {} : null;
-  return d >= 0 && d < it.n ? { p: d + 1 } : null;
+  if (it.rec === 'mensal' || it.rec === 'assinatura') return d >= 0 && (!it.end || k <= it.end) ? {} : null;
+  return d >= 0 && d <= it.n - it.p0 ? { p: it.p0 + d } : null; // parcelas p0..n, só daqui para frente
 }
 const dayOf = it => Math.min(+it.date.slice(8), dim(ym));
 const rows = kind => D.items.filter(i => i.kind === kind && occ(i, ym)).sort((a, b) => dayOf(a) - dayOf(b));
 
 function pick(it, kind, prop) { // lista selecionável; "＋ Nova…" cadastra um item novo na lista de saídas ou de entradas
   const list = D.lists[kind][prop === 'cat' ? 'cats' : 'accs'], cur = it[prop], what = prop === 'cat' ? 'categoria' : 'conta';
-  return el('select', { 'aria-label': prop === 'cat' ? 'Categoria' : 'Conta', value: cur, onchange: e => {
+  return el('select', { class: 'pk' + (prop === 'cat' && cur ? ' pc' : ''), style: prop === 'cat' && cur ? `background:${color(cur)}40;border-color:${color(cur)}` : '', 'aria-label': prop === 'cat' ? 'Categoria' : 'Conta', value: cur, onchange: e => {
     if (e.target.value === '__new__') { const n = (prompt(`Nome da nova ${what}:`) || '').trim(); if (!n) { e.target.value = cur; return; }
       const ex = list.find(x => x.toLowerCase() === n.toLowerCase()); if (!ex) list.push(n); it[prop] = ex || n; }
     else it[prop] = e.target.value;
@@ -185,22 +204,38 @@ function row(it, kind) {
   if (kind === 'out') cell('Tipo', el('select', { 'aria-label': 'Tipo', value: it.type, onchange: e => { it.type = e.target.value; save(); refresh(); } },
     ...['Débito', 'Crédito', 'Pix', 'Dinheiro', 'Boleto'].map(t => el('option', {}, t))));
   cell('Valor', el('input', { inputmode: 'decimal', 'aria-label': 'Valor', value: fld(it.amount), onchange: e => { it.amount = cents(e.target.value); e.target.value = fld(it.amount); save(); refresh(); } }));
-  const rep = el('div', { class: 'pr' }, el('select', { 'aria-label': 'Repete', value: it.rec, onchange: e => { it.rec = e.target.value; if (it.rec === 'parcelado' && !it.n) it.n = 2; save(); render(); } },
-    ...(kind === 'out' ? [['unico', 'Único'], ['mensal', 'Mensal'], ['parcelado', 'Parcelado']] : [['unico', 'Único'], ['mensal', 'Mensal']]).map(([v, l]) => el('option', { value: v }, l))));
+  const rep = el('div', { class: 'pr' }, el('select', { 'aria-label': 'Repete', value: it.rec, onchange: e => { const v = e.target.value;
+    if (v === 'parcelado') { const n = parseInt(prompt('Em quantas parcelas (total)?', it.n > 1 ? it.n : '3')); if (!(n >= 2)) { e.target.value = it.rec; return; } it.n = n; it.p0 = 1; } // as parcelas seguintes aparecem nos próximos meses
+    it.rec = v; save(); render(); } },
+    ...(kind === 'out' ? [['unico', 'Único'], ['mensal', 'Mensal'], ['assinatura', 'Assinatura'], ['parcelado', 'Parcelado']] : [['unico', 'Único'], ['mensal', 'Mensal']]).map(([v, l]) => el('option', { value: v }, l))));
   if (it.rec === 'parcelado') rep.append(
-    el('input', { type: 'number', min: 1, class: 'pn', 'aria-label': 'Parcela atual', value: o.p, onchange: e => { const p = Math.max(1, Math.min(it.n, parseInt(e.target.value) || 1)); it.date = shift(ym, -(p - 1)) + '-' + it.date.slice(8); save(); render(); } }), '/',
+    el('input', { type: 'number', min: 1, class: 'pn', 'aria-label': 'Parcela atual', value: o.p, onchange: e => { const p = Math.max(1, Math.min(it.n, parseInt(e.target.value) || 1)); it.date = ym + '-' + it.date.slice(8); it.p0 = p; save(); render(); } }), '/',
     el('input', { type: 'number', min: 1, class: 'pn', 'aria-label': 'Total de parcelas', value: it.n, onchange: e => { it.n = Math.max(o.p, parseInt(e.target.value) || o.p); save(); render(); } }));
+  if (it.end && ['mensal', 'assinatura'].includes(it.rec)) rep.append(el('small', { class: 'sub' }, 'até ' + it.end.slice(5) + '/' + it.end.slice(0, 4)));
   cell('Repete', rep);
   const stv = it.st[ym] || 'pendente';
   cell('Status', el('select', { class: 'st st-' + stv, 'aria-label': 'Status', value: stv, onchange: e => { it.st[ym] = e.target.value; e.target.className = 'st st-' + e.target.value; save(); refresh(); } },
     ...[['previsto', 'Previsto'], ['pendente', 'Pendente'], ['pago', kind === 'out' ? 'Pago' : 'Recebido']].map(([v, l]) => el('option', { value: v }, l))));
-  cell('', ...(it.rec === 'mensal' ? [el('button', { class: 'x', title: 'Encerrar a partir do mês seguinte', 'aria-label': 'Encerrar recorrência', onclick: () => { it.end = ym; save(); render(); } }, '⏹')] : []),
+  cell('', ...(['mensal', 'assinatura'].includes(it.rec) ? [it.end
+      ? el('button', { class: 'x lbl', onclick: () => { delete it.end; save(); render(); toast('Reativado: volta a aparecer todo mês.'); } }, 'Reativar')
+      : el('button', { class: 'x lbl', onclick: () => { if (!confirm(`Encerrar "${it.desc || 'este item'}"? Continua em ${monthName(ym)} e nos meses anteriores, mas não aparece a partir de ${monthName(shift(ym, 1))}.`)) return;
+          it.end = ym; save(); render(); toast('Encerrado: não aparece mais a partir de ' + monthName(shift(ym, 1)) + '.'); } }, 'Encerrar')] : []),
     el('button', { class: 'x', 'aria-label': 'Excluir', onclick: () => {
       const msg = it.rec === 'unico' ? `Excluir "${it.desc || 'sem descrição'}"?` : 'Este item se repete: excluir remove de TODOS os meses (use ⏹ para encerrar só daqui para frente). Excluir mesmo?';
       if (confirm(msg)) { D.items = D.items.filter(x => x.id !== it.id); save(); render(); } } }, '✕'));
   return tr;
 }
+function applyTheme() { document.documentElement.dataset.theme = D.theme; $('#hello').textContent = D.name ? `Olá, ${D.name}!` : ''; }
+function settings() {
+  const dlg = $('#dlg');
+  dlg.replaceChildren(el('h2', {}, 'Ajustes'), el('h3', {}, 'Seu nome'),
+    el('input', { id: 'cfg-name', class: 'lim', style: 'width:100%', maxlength: 40, 'aria-label': 'Seu nome', value: D.name || '', onchange: e => { D.name = e.target.value.trim(); save(); applyTheme(); } }),
+    el('h3', {}, 'Tema'), el('select', { id: 'cfg-theme', class: 'lim', style: 'width:100%', 'aria-label': 'Tema', value: D.theme, onchange: e => { D.theme = e.target.value; save(); applyTheme(); } }, ...THEMES.map(([v, l]) => el('option', { value: v }, l))),
+    el('p', {}, el('button', { onclick: () => dlg.close() }, 'Fechar')));
+  if (!dlg.open) dlg.showModal();
+}
 function render() {
+  applyTheme();
   $('#mlabel').textContent = new Date(+ym.slice(0, 4), +ym.slice(5) - 1, 1).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
   for (const kind of ['out', 'in']) { const tb = $('#t-' + kind), r = rows(kind); tb.replaceChildren(...r.map(i => row(i, kind))); $('#e-' + kind).hidden = r.length > 0; }
   renderBud(); renderGoals(); refresh();
@@ -213,6 +248,9 @@ function refresh() {
   const stOf = i => i.st[ym] || 'pendente';
   $('#s-pend').textContent = R(sum(O.filter(i => stOf(i) === 'pendente'))); $('#s-prev').textContent = 'Previsto: ' + R(sum(O.filter(i => stOf(i) === 'previsto')));
   pie(O);
+  const subs = O.filter(i => i.rec === 'assinatura'); // painel só com assinaturas (streaming, internet móvel etc.)
+  $('#subs-total').textContent = R(sum(subs)) + ' /mês'; $('#e-subs').hidden = subs.length > 0;
+  $('#subs').replaceChildren(...subs.map(i => el('div', { class: 'lg' }, el('i', { style: 'background:' + color(i.cat || 'Sem categoria') }), el('span', {}, i.desc || '(sem descrição)'), el('small', { class: 'sub' }, i.account || ''), el('b', {}, R(i.amount)))));
   const B = D.budgets[ym] || {}, sp = spentBy(O), al = Object.keys(B).filter(c => (sp[c] || 0) >= B[c] * .8).map(c => `${c} ${Math.round((sp[c] || 0) / B[c] * 100)}%`);
   $('#bud-alert').hidden = !al.length; $('#bud-alert').textContent = 'Orçamento perto ou acima do limite: ' + al.join(' · ');
 }
@@ -275,11 +313,11 @@ function pie(O) {
 }
 function add(kind) {
   const last = [...D.items].reverse().find(i => i.kind === kind) || {}, id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  D.items.push({ id, kind, desc: '', amount: 0, cat: '', account: last.account || '', type: kind === 'out' ? (last.type || 'Débito') : '', rec: 'unico', n: 0, st: {},
+  D.items.push({ id, kind, desc: '', amount: 0, cat: '', account: last.account || '', type: kind === 'out' ? (last.type || 'Débito') : '', rec: 'unico', n: 0, p0: 1, st: {},
     date: ym === todayISO().slice(0, 7) ? todayISO() : ym + '-01' });
   save(); render(); const f = document.querySelector(`[data-id="${id}"] [data-f="desc"]`); if (f) f.focus();
 }
-$('#lst-out').onclick = () => lists('out'); $('#lst-in').onclick = () => lists('in');
+$('#cfg').onclick = settings; $('#lst-out').onclick = () => lists('out'); $('#lst-in').onclick = () => lists('in');
 $('#add-out').onclick = () => add('out'); $('#add-in').onclick = () => add('in');
 $('#prev').onclick = () => { ym = shift(ym, -1); render(); }; $('#next').onclick = () => { ym = shift(ym, 1); render(); };
 $('#today').onclick = () => { ym = todayISO().slice(0, 7); render(); };
