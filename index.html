@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#2f5d43">
-<title>Mês a Mês</title>
+<title>Planejamento Mensal</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%232f5d43'/%3E%3Crect%20x='14'%20y='34'%20width='8'%20height='16'%20rx='2'%20fill='%23e6efe5'/%3E%3Crect%20x='28'%20y='24'%20width='8'%20height='26'%20rx='2'%20fill='%23e6efe5'/%3E%3Crect%20x='42'%20y='14'%20width='8'%20height='36'%20rx='2'%20fill='%23e5b85c'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAB9ElEQVR42u3cwQ2CQBBAUTA2QRUU4UlaMFqCxViCCS1gSbRhA8YIuzKaee/MQsTv4GVp+/OhgVd2bgHiQByIA3EgDsSBOBAH4kAcIA7EgTgQB+JAHIgDcSAOxAHiQByIA3EgDsSBOBAH4kAcIA7EgTgQB+JAHIiDP7N3C7Y0nbpFxw/jLA5ZvFsVlYjHyu+WUWu5OBBHvrERODzEgTgQB+JAHIgDcSAOxIE4EAeIA3EgDsSBOBAH4kAciANxgDgQB+LgG/LulX3c7p8ffLxexCGLd0uyJbJTxjZrxYE4Uo6NhMPD5EAciANxIA7EgTgQB+JAHIgDxIE4EAfiQByIA3EgDsSBOEAciIMC8dshl+4EybltNV0c6zYI5dy2muuxUrh1LNu2Vf85EEel373hYXIgDsSBOBAH4kAcIA7EgTgQB+JAHIgDcSAOxAHiQByIA3EgDsSBOBAH4kAciAPEgTgQB+JAHIgDcSAOxIE4NlTlFbMrTlJ+3RVnGMa5/MNWOUmWyRHyBuOo1yaHlBEZR8mNDllbctGSbzeqjKZp2v58iJ0BUS/GX3TdWhedTt2/lPETceAPKeJAHIgDcYA4EAfiQByIA3EgDsSBOBAHiANxIA7EgTgQB+JAHIgDcYA4EAfiQByIA3EgDsSBOBAH4gBxsMwT9UxL365FEd4AAAAASUVORK5CYII=">
 <style>
 :root{--bg:#f7f7f2;--card:#fff;--tx:#202720;--tx2:#737a73;--bd:#e6e9e2;--p:#2f5d43;--pl:#e6efe5;--red:#c75b52;--redl:#fbeae7;--yel:#f3dfa8}
 :root[data-theme=escuro]{--bg:#121614;--card:#1b211e;--tx:#e8ede9;--tx2:#9aa59e;--bd:#2a332e;--p:#6faf8a;--pl:#22302a;--redl:#3a2320;--yel:#5a4a1c}:root[data-theme=escuro] .st-previsto{background:#233546;color:#a9c8e8}
@@ -44,7 +46,7 @@ h3{margin:12px 0 6px;font-size:.9rem}.chips{display:flex;flex-wrap:wrap;gap:6px}
 .lg{display:flex;align-items:center;gap:8px;padding:3px 0;font-size:.9rem}.lg i{width:11px;height:11px;border-radius:50%;flex-shrink:0}.lg span{flex:1}
 footer{color:var(--tx2);font-size:.8rem;margin:16px 0 80px}
 .tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto}.tabs button{background:var(--pl);color:var(--p)}.tabs button[aria-selected=true]{background:var(--p);color:var(--card)}
-body[data-view=goals] #mnav{display:none}
+body[data-view=goals] #mnav,body[data-view=inv] #mnav{display:none}
 .bar{height:9px;background:var(--pl);border-radius:9px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--p)}.bar i.warn{background:#e5b85c}.bar i.over{background:var(--red)}
 .brow{padding:10px 0;border-top:1px solid var(--bd)}.brow .hd{margin:0}
 .add{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
@@ -53,13 +55,21 @@ body[data-view=goals] #mnav{display:none}
 .gn{font:inherit;font-weight:600;border:1px solid transparent;background:transparent;color:inherit;padding:6px;border-radius:8px;flex:1;min-width:0}.gn:hover,.gn:focus{border-color:var(--bd)}
 .alert{background:var(--redl);color:var(--red);border-radius:12px;padding:8px 12px;margin:0 0 14px}
 .sub{color:var(--tx2);font-size:.75rem;white-space:nowrap}
+.logo{width:26px;height:26px;vertical-align:-6px;margin-right:8px;border-radius:6px}
+.sq{width:13px;height:13px;min-width:0;padding:0;border-radius:3px;border:1.5px solid var(--tx2);background:transparent;opacity:.75;cursor:pointer;vertical-align:middle;margin:0 6px}.sq:hover{opacity:1;border-color:var(--p)}.sq.on{background:var(--red);border-color:var(--red);opacity:1}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.fgrid label{display:grid;gap:4px;font-size:.82rem;color:var(--tx2)}
+.fgrid input,.fgrid select{border:1px solid var(--bd);border-radius:10px;padding:9px;background:var(--bg);color:var(--tx);font:inherit;width:100%}.two{display:flex;gap:6px}.two input{flex:1;min-width:0}.two select{width:auto}
+#s-chart{width:100%;max-width:640px;display:block;margin:6px 0}.gain{white-space:nowrap}
+.sh{background:transparent;color:var(--tx2);padding:2px 4px;border-radius:6px;font-size:.8rem;font-weight:500;display:inline-flex;gap:4px;align-items:center}.sh:hover{background:var(--pl)}
+.sh i{font-style:normal;font-size:.65rem;opacity:.4}.sh.on{color:var(--p);font-weight:700}.sh.on i{opacity:1}
+.sortsel{display:none;border:1px solid var(--bd);border-radius:10px;padding:7px;background:var(--bg);color:var(--tx);font:inherit}.hd{flex-wrap:wrap;gap:8px}
 table.wide{min-width:1060px}table.mid{min-width:720px}
 td select.pk{min-width:150px}td select.pc{border:1px solid;border-radius:99px;padding-left:10px}td input[data-f=desc]{min-width:160px}td input[type=date]{min-width:132px}
 .lbl{font-size:.78rem;padding:6px 8px;border:1px solid var(--bd);white-space:nowrap}
 h1 small{font-weight:400;color:var(--tx2);font-size:.9rem;margin-left:8px}
 #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--p);color:var(--card);padding:10px 16px;border-radius:12px;opacity:0;transition:.2s;pointer-events:none;z-index:50;max-width:92vw}#toast.show{opacity:1}
 @media(max-width:800px){
- .row2{grid-template-columns:1fr}table.wide,table.mid{min-width:0}
+ .row2{grid-template-columns:1fr}.sortsel{display:inline-block}table.wide,table.mid{min-width:0}
  table,tbody,tr,td{display:block}thead{display:none}
  tr{border:1px solid var(--bd);border-radius:12px;margin-bottom:10px;padding:6px}
  td{display:flex;align-items:center;gap:8px;border:0}td::before{content:attr(data-l);width:78px;color:var(--tx2);font-size:.8rem;flex-shrink:0}
@@ -70,7 +80,7 @@ h1 small{font-weight:400;color:var(--tx2);font-size:.9rem;margin-left:8px}
 <body>
 <div class="wrap">
 <header>
-  <h1>Planejamento Mensal<small id="hello"></small></h1>
+  <h1><img class="logo" alt="" width="26" height="26">Planejamento Mensal<small id="hello"></small></h1>
   <div class="nav" id="mnav">
     <button class="g" id="prev" aria-label="Mês anterior">‹</button>
     <span id="mlabel" aria-live="polite"></span>
@@ -85,7 +95,7 @@ h1 small{font-weight:400;color:var(--tx2);font-size:.9rem;margin-left:8px}
 </header>
 
 <div class="tabs" role="tablist" aria-label="Seções">
-  <button role="tab" data-tab="plan" aria-selected="true">Planilha</button><button role="tab" data-tab="bud" aria-selected="false">Orçamento</button><button role="tab" data-tab="goals" aria-selected="false">Metas</button>
+  <button role="tab" data-tab="plan" aria-selected="true">Planilha</button><button role="tab" data-tab="bud" aria-selected="false">Orçamento</button><button role="tab" data-tab="goals" aria-selected="false">Metas</button><button role="tab" data-tab="inv" aria-selected="false">Investimentos</button>
 </div>
 <div id="tab-plan">
 <p class="alert" id="bud-alert" role="alert" hidden></p>
@@ -98,15 +108,15 @@ h1 small{font-weight:400;color:var(--tx2);font-size:.9rem;margin-left:8px}
 </div>
 
 <section class="card">
-  <div class="hd"><h2>Saídas</h2><span><button class="g" id="lst-out">Listas</button> <button id="add-out">+ Saída</button></span></div>
-  <div class="tw"><table class="wide"><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Conta</th><th>Tipo</th><th>Valor</th><th>Repete</th><th>Status</th><th></th></tr></thead><tbody id="t-out"></tbody></table></div>
+  <div class="hd"><h2>Saídas</h2><span><select class="sortsel" id="ss-out" aria-label="Ordenar saídas por"></select> <button class="g" id="lst-out">Listas</button> <button id="add-out">+ Saída</button></span></div>
+  <div class="tw"><table class="wide"><thead id="h-out"></thead><tbody id="t-out"></tbody></table></div>
   <p class="empty" id="e-out">Nenhuma saída neste mês. Clique em “+ Saída” para começar.</p>
 </section>
 
 <div class="row2">
   <section class="card">
-    <div class="hd"><h2>Entradas</h2><span><button class="g" id="lst-in">Listas</button> <button id="add-in">+ Entrada</button></span></div>
-    <div class="tw"><table class="mid"><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Conta</th><th>Valor</th><th>Repete</th><th>Status</th><th></th></tr></thead><tbody id="t-in"></tbody></table></div>
+    <div class="hd"><h2>Entradas</h2><span><select class="sortsel" id="ss-in" aria-label="Ordenar entradas por"></select> <button class="g" id="lst-in">Listas</button> <button id="add-in">+ Entrada</button></span></div>
+    <div class="tw"><table class="mid"><thead id="h-in"></thead><tbody id="t-in"></tbody></table></div>
     <p class="empty" id="e-in">Nenhuma entrada neste mês. Clique em “+ Entrada”.</p>
   </section>
   <section class="card">
@@ -125,6 +135,30 @@ h1 small{font-weight:400;color:var(--tx2);font-size:.9rem;margin-left:8px}
     <div class="add"><input id="g-name" placeholder="Nome (ex.: Reserva de emergência)" aria-label="Nome da meta"><input id="g-target" inputmode="decimal" placeholder="Valor (R$)" aria-label="Valor da meta"><input id="g-date" type="date" aria-label="Prazo (opcional)"><button id="g-add">Criar meta</button></div></section>
   <div class="gr" id="goals"></div>
   <p class="empty">O valor guardado nas metas é uma reserva: não entra nas entradas nem nos gastos da planilha.</p></div>
+<div id="tab-inv" hidden>
+  <div class="cards" id="inv-sum"></div>
+  <section class="card"><div class="hd"><h2>Meus investimentos</h2><button id="add-inv">+ Investimento</button></div>
+    <div class="tw"><table class="mid"><thead><tr><th>Nome</th><th>Tipo</th><th>Instituição</th><th>Aplicado</th><th>Valor atual</th><th>Rendimento</th><th></th></tr></thead><tbody id="t-inv"></tbody></table></div>
+    <p class="empty" id="e-inv">Nenhum investimento cadastrado. Clique em “+ Investimento” para começar.</p></section>
+  <section class="card" id="alloc-card" style="margin-top:14px"><div class="hd"><h2>Distribuição por tipo</h2></div><div id="alloc"></div></section>
+  <section class="card" id="sim" style="margin-top:14px"><div class="hd"><h2>Simulador de investimentos</h2></div>
+    <div class="fgrid">
+      <label>Valor inicial (R$)<input id="s-ini" inputmode="decimal"></label>
+      <label>Aporte mensal (R$)<input id="s-apt" inputmode="decimal"></label>
+      <label>Rentabilidade de referência<select id="s-preset"><option value="">Taxa personalizada</option><option value="cdi100">CDB 100% do CDI</option><option value="cdi110">CDB 110% do CDI</option><option value="cdi120">CDB 120% do CDI</option><option value="selic">Tesouro Selic (≈ Selic)</option><option value="lci90">LCI/LCA 90% do CDI (isento)</option><option value="poup">Poupança</option></select></label>
+      <label>Taxa de juros (%)<span class="two"><input id="s-rate" inputmode="decimal"><select id="s-per"><option value="a">ao ano</option><option value="m">ao mês</option></select></span></label>
+      <label>Prazo<span class="two"><input id="s-time" inputmode="numeric"><select id="s-unit"><option value="anos">anos</option><option value="meses">meses</option></select></span></label>
+      <label>Imposto<select id="s-tax"><option value="ir">IR regressivo (CDB, Tesouro, fundos)</option><option value="isento">Isento (poupança, LCI, LCA)</option></select></label>
+      <label>Inflação (% ao ano, opcional)<input id="s-infl" inputmode="decimal"></label>
+      <label>Quero chegar a (R$, opcional)<input id="s-goal" inputmode="decimal"></label>
+    </div>
+    <p class="empty" id="s-ref" style="text-align:left"></p>
+    <div id="s-out"></div>
+    <svg id="s-chart" viewBox="0 0 600 200" role="img" aria-label="Evolução do valor líquido e do total investido"></svg>
+    <p class="sub">Linha verde: valor líquido · tracejada: total investido</p>
+    <div class="tw"><table id="s-tab"></table></div>
+  </section>
+</div>
 <footer>Os dados ficam só neste navegador. Exporte um backup de vez em quando.</footer>
 </div>
 <dialog id="dlg"></dialog>
@@ -159,7 +193,7 @@ function norm(o) {
   if (!o.lists) { o.lists = {}; for (const k of ['out', 'in']) { const mine = f => o.items.filter(i => i.kind === k && i[f]).map(i => i[f]);
     o.lists[k] = { cats: [...new Set([...DEF[k], ...mine('cat')])], accs: [...new Set(mine('account'))] }; } }
   o.items.forEach(i => { i.p0 = i.p0 || 1; });
-  o.budgets = o.budgets || {}; o.goals = o.goals || []; o.colors = o.colors || {}; o.theme = o.theme || 'sistema'; if (o.name === undefined) o.name = 'Daniele';
+  o.budgets = o.budgets || {}; o.goals = o.goals || []; o.colors = o.colors || {}; o.invest = o.invest || []; o.sim = o.sim || { ini: '1.000,00', apt: '200,00', preset: 'cdi100', rate: '13,65', per: 'a', time: '5', unit: 'anos', tax: 'ir', infl: '', goal: '' }; o.sort = o.sort || {}; o.theme = o.theme || 'sistema'; if (o.name === undefined) o.name = 'Daniele';
   return o;
 }
 function load() { try { const o = JSON.parse(localStorage.getItem(KEY)); if (valid(o)) return norm(o); } catch (e) {} return norm({ items: [] }); }
@@ -216,10 +250,11 @@ function row(it, kind) {
   const stv = it.st[ym] || 'pendente';
   cell('Status', el('select', { class: 'st st-' + stv, 'aria-label': 'Status', value: stv, onchange: e => { it.st[ym] = e.target.value; e.target.className = 'st st-' + e.target.value; save(); refresh(); } },
     ...[['previsto', 'Previsto'], ['pendente', 'Pendente'], ['pago', kind === 'out' ? 'Pago' : 'Recebido']].map(([v, l]) => el('option', { value: v }, l))));
-  cell('', ...(['mensal', 'assinatura'].includes(it.rec) ? [it.end
-      ? el('button', { class: 'x lbl', onclick: () => { delete it.end; save(); render(); toast('Reativado: volta a aparecer todo mês.'); } }, 'Reativar')
-      : el('button', { class: 'x lbl', onclick: () => { if (!confirm(`Encerrar "${it.desc || 'este item'}"? Continua em ${monthName(ym)} e nos meses anteriores, mas não aparece a partir de ${monthName(shift(ym, 1))}.`)) return;
-          it.end = ym; save(); render(); toast('Encerrado: não aparece mais a partir de ' + monthName(shift(ym, 1)) + '.'); } }, 'Encerrar')] : []),
+  cell('', ...(['mensal', 'assinatura'].includes(it.rec) ? [el('button', { class: 'sq' + (it.end ? ' on' : ''), role: 'switch', 'aria-checked': !!it.end,
+      title: it.end ? 'Encerrado: clique para reativar' : 'Ativo: clique para encerrar a partir do mês seguinte', 'aria-label': it.end ? 'Reativar recorrência' : 'Encerrar recorrência a partir do mês seguinte',
+      onclick: () => { if (it.end) { delete it.end; save(); render(); toast('Reativado: volta a aparecer todo mês.'); return; }
+        if (!confirm(`Encerrar "${it.desc || 'este item'}"? Continua em ${monthName(ym)} e nos meses anteriores, mas não aparece a partir de ${monthName(shift(ym, 1))}.`)) return;
+        it.end = ym; save(); render(); toast('Encerrado: não aparece mais a partir de ' + monthName(shift(ym, 1)) + '.'); } })] : []),
     el('button', { class: 'x', 'aria-label': 'Excluir', onclick: () => {
       const msg = it.rec === 'unico' ? `Excluir "${it.desc || 'sem descrição'}"?` : 'Este item se repete: excluir remove de TODOS os meses (use ⏹ para encerrar só daqui para frente). Excluir mesmo?';
       if (confirm(msg)) { D.items = D.items.filter(x => x.id !== it.id); save(); render(); } } }, '✕'));
@@ -234,11 +269,36 @@ function settings() {
     el('p', {}, el('button', { onclick: () => dlg.close() }, 'Fechar')));
   if (!dlg.open) dlg.showModal();
 }
+/* Ordenação: clique no cabeçalho (▲ crescente, ▼ decrescente); no celular use o seletor "Ordenar". Vazios ficam sempre no fim. */
+const HEAD = { out: [['date', 'Data'], ['desc', 'Descrição'], ['cat', 'Categoria'], ['account', 'Conta'], ['type', 'Tipo'], ['amount', 'Valor'], [null, 'Repete'], ['status', 'Status'], [null, '']],
+  in: [['date', 'Data'], ['desc', 'Descrição'], ['cat', 'Categoria'], ['account', 'Conta'], ['amount', 'Valor'], [null, 'Repete'], ['status', 'Status'], [null, '']] };
+const STORD = { previsto: 0, pendente: 1, pago: 2 };
+const getSort = kind => D.sort[kind] || { k: 'date', d: 1 };
+function setSort(kind, k, d) { const c = getSort(kind); D.sort[kind] = { k, d: d || (c.k === k ? -c.d : 1) }; save(); render(); }
+function sortRows(kind, list) {
+  const { k, d } = getSort(kind), val = { date: dayOf, amount: i => i.amount, status: i => STORD[i.st[ym] || 'pendente'] }[k];
+  return [...list].sort((a, b) => {
+    if (val) return d * (val(a) - val(b)) || dayOf(a) - dayOf(b);
+    const x = a[k] || '', y = b[k] || '';
+    if (!x !== !y) return x ? -1 : 1;
+    return d * x.localeCompare(y, 'pt-BR', { sensitivity: 'base' }) || dayOf(a) - dayOf(b);
+  });
+}
+function buildHeads() {
+  for (const kind of ['out', 'in']) {
+    const cur = getSort(kind), tr = el('tr');
+    HEAD[kind].forEach(([k, l]) => { const th = el('th', k ? { 'aria-sort': cur.k === k ? (cur.d > 0 ? 'ascending' : 'descending') : 'none' } : {});
+      if (k) th.append(el('button', { class: 'sh' + (cur.k === k ? ' on' : ''), 'aria-label': 'Ordenar por ' + l, onclick: () => setSort(kind, k) }, l, el('i', {}, cur.k === k ? (cur.d > 0 ? '▲' : '▼') : '↕'))); else th.append(l);
+      tr.append(th); });
+    $('#h-' + kind).replaceChildren(tr);
+    const ss = $('#ss-' + kind); ss.replaceChildren(...HEAD[kind].filter(h => h[0]).flatMap(([k, l]) => [1, -1].map(d => el('option', { value: k + '|' + d }, `${l} ${d > 0 ? '↑' : '↓'}`)))); ss.value = cur.k + '|' + cur.d;
+  }
+}
 function render() {
-  applyTheme();
+  applyTheme(); buildHeads();
   $('#mlabel').textContent = new Date(+ym.slice(0, 4), +ym.slice(5) - 1, 1).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
-  for (const kind of ['out', 'in']) { const tb = $('#t-' + kind), r = rows(kind); tb.replaceChildren(...r.map(i => row(i, kind))); $('#e-' + kind).hidden = r.length > 0; }
-  renderBud(); renderGoals(); refresh();
+  for (const kind of ['out', 'in']) { const tb = $('#t-' + kind), r = sortRows(kind, rows(kind)); tb.replaceChildren(...r.map(i => row(i, kind))); $('#e-' + kind).hidden = r.length > 0; }
+  renderBud(); renderGoals(); renderInv(); refresh();
 }
 function refresh() {
   const O = rows('out'), I = rows('in'), sum = a => a.reduce((x, i) => x + i.amount, 0);
@@ -293,8 +353,83 @@ function renderGoals() {
 }
 $('#g-add').onclick = () => { const name = $('#g-name').value.trim(), t = cents($('#g-target').value); if (!name || t <= 0) { alert('Informe o nome e um valor maior que zero.'); return; }
   D.goals.push({ id: uid(), name, target: t, saved: 0, deadline: $('#g-date').value }); save(); ['#g-name', '#g-target', '#g-date'].forEach(x => $(x).value = ''); renderGoals(); };
+/* ---------- Investimentos ---------- */
+const REF = { selic: 13.75, cdi: 13.65, asOf: '04/11/2026' }; // taxas de referência (Banco Central / imprensa); a taxa do simulador é editável
+const INV_TYPES = ['Renda fixa', 'Tesouro Direto', 'Poupança', 'Ações', 'FIIs', 'Fundos', 'Criptomoedas', 'Outro'];
+const num = v => { let t = String(v).trim(); if (t.includes(',')) t = t.replace(/\./g, '').replace(',', '.'); const n = parseFloat(t); return isNaN(n) ? 0 : n; };
+const fmtN = x => String(+x.toFixed(2)).replace('.', ',');
+const pc = x => (x * 100).toFixed(2).replace('.', ',') + '%';
+const fmtTime = m => [Math.floor(m / 12) ? `${Math.floor(m / 12)} ano${Math.floor(m / 12) > 1 ? 's' : ''}` : '', m % 12 ? `${m % 12} ${m % 12 > 1 ? 'meses' : 'mês'}` : ''].filter(Boolean).join(' e ') || '0 mês';
+/* IR regressivo da renda fixa: 22,5% (até 180 dias), 20% (até 360), 17,5% (até 720), 15% (acima). */
+const irRate = days => days <= 180 ? .225 : days <= 360 ? .2 : days <= 720 ? .175 : .15;
+/* Valor após M meses: juros compostos, aporte no fim de cada mês; o IR é calculado sobre o rendimento de cada aporte conforme o tempo aplicado. */
+function netAt(p, M) {
+  const f = a => Math.pow(1 + p.r, a), lot = (amt, age) => p.tax === 'ir' ? amt * (f(age) - 1) * irRate(age * 30) : 0;
+  let gross = p.ini * f(M), tax = lot(p.ini, M);
+  for (let m = 1; m <= M; m++) { gross += p.apt * f(M - m); tax += lot(p.apt, M - m); }
+  return { gross, tax, net: gross - tax, invested: p.ini + p.apt * M };
+}
+function monthsToGoal(p, goal) { for (let m = 1; m <= 1200; m++) if (netAt(p, m).net >= goal) return m; return null; }
+function presetRate(v) { // [% ao ano, imposto]
+  const poup = REF.selic > 8.5 ? (Math.pow(1.005, 12) - 1) * 100 : REF.selic * .7; // poupança: 0,5% ao mês + TR (Selic acima de 8,5%) ou 70% da Selic
+  return { cdi100: [REF.cdi, 'ir'], cdi110: [REF.cdi * 1.1, 'ir'], cdi120: [REF.cdi * 1.2, 'ir'], selic: [REF.selic, 'ir'], lci90: [REF.cdi * .9, 'isento'], poup: [poup, 'isento'] }[v];
+}
+function invRow(g) {
+  const tr = el('tr', { 'data-id': g.id }), cell = (l, ...c) => tr.append(el('td', { 'data-l': l }, ...c)), gain = g.current - g.applied;
+  cell('Nome', el('input', { 'data-f': 'invname', 'aria-label': 'Nome do investimento', placeholder: 'Ex.: CDB Banco X', value: g.name, oninput: e => { g.name = e.target.value; save(); } }));
+  cell('Tipo', el('select', { 'aria-label': 'Tipo de investimento', value: g.type, onchange: e => { g.type = e.target.value; save(); renderInv(); } }, ...INV_TYPES.map(t => el('option', { value: t }, t))));
+  cell('Instituição', el('input', { 'aria-label': 'Instituição', value: g.inst, onchange: e => { g.inst = e.target.value.trim(); save(); } }));
+  cell('Aplicado', el('input', { inputmode: 'decimal', 'aria-label': 'Valor aplicado', value: fld(g.applied), onchange: e => { const v = cents(e.target.value), same = g.current === g.applied; g.applied = v; if (same || !g.current) g.current = v; save(); renderInv(); } }));
+  cell('Valor atual', el('input', { inputmode: 'decimal', 'aria-label': 'Valor atual', value: fld(g.current), onchange: e => { g.current = cents(e.target.value); save(); renderInv(); } }));
+  cell('Rendimento', el('span', { class: 'gain ' + (gain < 0 ? 'neg' : 'pos') }, (gain >= 0 ? '+' : '') + R(gain) + (g.applied ? ` (${pc(gain / g.applied)})` : '')));
+  cell('', el('button', { class: 'x', 'aria-label': 'Excluir investimento', onclick: () => { if (confirm(`Excluir "${g.name || 'este investimento'}"?`)) { D.invest = D.invest.filter(x => x.id !== g.id); save(); renderInv(); } } }, '✕'));
+  return tr;
+}
+function renderInv() {
+  const L = D.invest, ap = L.reduce((a, g) => a + g.applied, 0), cu = L.reduce((a, g) => a + g.current, 0), gain = cu - ap;
+  const card = (l, v, c) => el('div', { class: 'card k' }, el('small', {}, l), el('b', { class: c || '' }, v));
+  $('#inv-sum').replaceChildren(card('Total aplicado', R(ap)), card('Valor atual', R(cu)), card('Rendimento', (gain >= 0 ? '+' : '') + R(gain), gain < 0 ? 'neg' : 'pos'), card('Rentabilidade', ap ? pc(gain / ap) : '—', gain < 0 ? 'neg' : 'pos'));
+  $('#t-inv').replaceChildren(...L.map(invRow)); $('#e-inv').hidden = L.length > 0;
+  const by = {}; L.forEach(g => by[g.type] = (by[g.type] || 0) + g.current);
+  $('#alloc-card').hidden = !(cu > 0);
+  $('#alloc').replaceChildren(...Object.entries(by).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]).map(([t, v]) => el('div', { class: 'brow' },
+    el('div', { class: 'hd' }, el('span', {}, el('i', { style: 'display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:' + color('inv:' + t) }), t), el('b', {}, `${R(v)} · ${pc(v / cu)}`)),
+    el('div', { class: 'bar' }, el('i', { style: `width:${v / cu * 100}%;background:${color('inv:' + t)}` })))));
+}
+function runSim() {
+  const S = D.sim, ini = cents(S.ini), apt = cents(S.apt), rate = num(S.rate), t = Math.floor(num(S.time)), M = Math.min(1200, S.unit === 'anos' ? t * 12 : t);
+  const infl = num(S.infl), goal = cents(S.goal), out = $('#s-out'), ch = $('#s-chart'), tb = $('#s-tab');
+  ch.replaceChildren(); tb.replaceChildren();
+  if (!(M >= 1) || rate < 0 || (ini <= 0 && apt <= 0)) { out.replaceChildren(el('p', { class: 'empty' }, 'Informe valor inicial ou aporte, a taxa e o prazo para simular.')); return; }
+  const r = S.per === 'm' ? rate / 100 : Math.pow(1 + rate / 100, 1 / 12) - 1, p = { ini, apt, r, tax: S.tax }, f = netAt(p, M), gain = f.net - f.invested;
+  const card = (l, v, c) => el('div', { class: 'card k' }, el('small', {}, l), el('b', { class: c || '' }, R(Math.round(v))));
+  const rows = [el('div', { class: 'cards' }, card('Total investido', f.invested), card('Valor bruto', f.gross), card('Imposto de renda (estimado)', f.tax, f.tax > 0 ? 'neg' : ''), card('Valor líquido', f.net, 'pos')),
+    el('p', {}, `Em ${fmtTime(M)} você teria ${R(Math.round(f.net))} líquidos: rendimento líquido de ${R(Math.round(gain))}${f.invested ? ` (${pc(gain / f.invested)} sobre o total investido)` : ''}.`)];
+  if (infl > 0) rows.push(el('p', {}, `Corrigindo pela inflação de ${fmtN(infl)}% ao ano, isso equivale a ${R(Math.round(f.net / Math.pow(1 + infl / 100, M / 12)))} em poder de compra de hoje.`));
+  if (goal > 0) { const g = monthsToGoal(p, goal); rows.push(el('p', {}, g ? `Para chegar a ${R(goal)} líquidos: ${fmtTime(g)}.` : `Com esses números, não chega a ${R(goal)} em 100 anos.`)); }
+  rows.push(el('p', { class: 'empty', style: 'text-align:left' }, 'Estimativa: juros compostos mensais, aportes no fim de cada mês, IR regressivo (22,5% até 180 dias, 20% até 360, 17,5% até 720 e 15% acima) cobrado no resgate sobre cada aporte; sem IOF, taxas de custódia ou administração. Rentabilidade projetada não garante resultado futuro.'));
+  out.replaceChildren(...rows);
+  const step = Math.max(1, Math.ceil(M / 60)), ms = []; for (let m = 0; m < M; m += step) ms.push(m); ms.push(M);
+  const pts = ms.map(m => [m, netAt(p, m)]), mx = Math.max(...pts.map(x => Math.max(x[1].net, x[1].invested)), 1), X = m => 10 + m / M * 580, Y = v => 190 - v / mx * 170;
+  const mk = (tag, a) => { const e = document.createElementNS('http://www.w3.org/2000/svg', tag); for (const k in a) e.setAttribute(k, a[k]); return e; };
+  ch.append(mk('polyline', { points: pts.map(([m, x]) => `${X(m)},${Y(x.invested)}`).join(' '), style: 'fill:none;stroke:var(--tx2);stroke-width:2;stroke-dasharray:5 4' }),
+    mk('polyline', { points: pts.map(([m, x]) => `${X(m)},${Y(x.net)}`).join(' '), style: 'fill:none;stroke:var(--p);stroke-width:3' }));
+  const ys = []; for (let m = M > 360 ? 60 : 12; m < M; m += M > 360 ? 60 : 12) ys.push(m); ys.push(M);
+  tb.append(el('thead', {}, el('tr', {}, ...['Período', 'Investido', 'Líquido', 'Rendimento líquido'].map(h => el('th', {}, h)))),
+    el('tbody', {}, ...ys.map(m => { const x = netAt(p, m); return el('tr', {}, el('td', { 'data-l': 'Período' }, fmtTime(m)), el('td', { 'data-l': 'Investido' }, R(Math.round(x.invested))), el('td', { 'data-l': 'Líquido' }, R(Math.round(x.net))), el('td', { 'data-l': 'Rendimento' }, R(Math.round(x.net - x.invested)))); })));
+}
+function initSim() {
+  const ids = ['ini', 'apt', 'rate', 'per', 'time', 'unit', 'tax', 'infl', 'goal'], S = D.sim, fill = () => ids.forEach(k => $('#s-' + k).value = S[k]);
+  fill(); $('#s-preset').value = S.preset || '';
+  $('#s-ref').textContent = `Referências em ${REF.asOf}: Selic ${fmtN(REF.selic)}% a.a. e CDI ≈ ${fmtN(REF.cdi)}% a.a.; poupança = 0,5% ao mês + TR (≈ ${fmtN(presetRate('poup')[0])}% a.a.). São valores de referência: confira as taxas atuais na sua instituição.`;
+  ids.forEach(k => ['input', 'change'].forEach(ev => $('#s-' + k).addEventListener(ev, e => { S[k] = e.target.value; if (['rate', 'per', 'tax'].includes(k)) { S.preset = ''; $('#s-preset').value = ''; } save(); runSim(); })));
+  $('#s-preset').addEventListener('change', e => { const v = e.target.value; S.preset = v; const pr = presetRate(v); if (pr) { S.rate = fmtN(pr[0]); S.per = 'a'; S.tax = pr[1]; fill(); } save(); runSim(); });
+  $('#add-inv').onclick = () => { const id = uid(); D.invest.push({ id, name: '', type: 'Renda fixa', inst: '', applied: 0, current: 0 }); save(); renderInv(); const f = document.querySelector(`[data-id="${id}"] [data-f="invname"]`); if (f) f.focus(); };
+  document.querySelector('.logo').src = document.querySelector('link[rel=icon]').href;
+  runSim();
+}
 let tab = 'plan';
-function setTab(t) { tab = t; document.body.dataset.view = t; ['plan', 'bud', 'goals'].forEach(k => $('#tab-' + k).hidden = k !== t); document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === t)); render(); }
+function setTab(t) { tab = t; document.body.dataset.view = t; ['plan', 'bud', 'goals', 'inv'].forEach(k => $('#tab-' + k).hidden = k !== t); document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === t)); render(); }
 document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => setTab(b.dataset.tab));
 function pie(O) {
   const m = {}; O.forEach(i => { const c = i.cat.trim() || 'Sem categoria'; m[c] = (m[c] || 0) + i.amount; });
@@ -317,11 +452,12 @@ function add(kind) {
     date: ym === todayISO().slice(0, 7) ? todayISO() : ym + '-01' });
   save(); render(); const f = document.querySelector(`[data-id="${id}"] [data-f="desc"]`); if (f) f.focus();
 }
-$('#cfg').onclick = settings; $('#lst-out').onclick = () => lists('out'); $('#lst-in').onclick = () => lists('in');
+['out', 'in'].forEach(kind => $('#ss-' + kind).onchange = e => { const [k, d] = e.target.value.split('|'); setSort(kind, k, +d); });
+initSim(); $('#cfg').onclick = settings; $('#lst-out').onclick = () => lists('out'); $('#lst-in').onclick = () => lists('in');
 $('#add-out').onclick = () => add('out'); $('#add-in').onclick = () => add('in');
 $('#prev').onclick = () => { ym = shift(ym, -1); render(); }; $('#next').onclick = () => { ym = shift(ym, 1); render(); };
 $('#today').onclick = () => { ym = todayISO().slice(0, 7); render(); };
-$('#exp').onclick = () => { const a = el('a', { href: URL.createObjectURL(new Blob([JSON.stringify(D, null, 1)], { type: 'application/json' })), download: 'mes-a-mes-backup.json' }); a.click(); };
+$('#exp').onclick = () => { const a = el('a', { href: URL.createObjectURL(new Blob([JSON.stringify(D, null, 1)], { type: 'application/json' })), download: 'planejamento-mensal-backup.json' }); a.click(); };
 $('#imp').onchange = e => { const f = e.target.files[0]; if (!f) return; const fr = new FileReader();
   fr.onload = () => { try { const o = JSON.parse(fr.result); if (!valid(o)) throw 0; if (confirm('Substituir os dados atuais pelo backup?')) { D = norm(o);  save(); render(); } } catch (x) { alert('Arquivo de backup inválido. Nada foi alterado.'); } };
   fr.readAsText(f); e.target.value = ''; };
